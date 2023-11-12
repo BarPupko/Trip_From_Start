@@ -1,4 +1,5 @@
 #include "Trip.h"
+#include "Date.h"
 #include <cstring>
 
 // Initialize the static member variable
@@ -49,9 +50,9 @@ Date Trip::getDate() const {
 }
 
 // Setters
-void Trip::setTripNum(int num) {
-    TripNum = num;
-}
+//void Trip::setTripNum(int num) {
+//    TripNum = num;
+//}
 
 
 void Trip::setTripDesk(const char *desk) {

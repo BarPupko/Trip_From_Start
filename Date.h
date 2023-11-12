@@ -8,14 +8,14 @@ private:
     int year;
 
 public:
-    Date(int d = 1, int m = 1, int y = 2000); // Constructor with default values
+    Date(int day = 1, int month = 1, int year = 2000); // Constructor with default values
     int getDay() const;
     int getMonth() const;
     int getYear() const;
 
-    void setDay(int d);
-    void setMonth(int m);
-    void setYear(int y);
+    void setDay(int day);
+    void setMonth(int month);
+    void setYear(int year);
 
     void print() const; // Function to print the date
 };

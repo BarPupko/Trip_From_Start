@@ -23,7 +23,7 @@ public:
     const char* getTripDesk() const;
     Date getDate() const;
 
-    void setTripNum(int num);
+//    void setTripNum(int num); //remove set TripNum
     void setTripDesk(const char* desk);
 
     void print() const;
