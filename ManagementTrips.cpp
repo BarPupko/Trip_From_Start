@@ -1,5 +1,6 @@
 #include "ManagementTrips.h"
 #include "Date.h"
+static int numTrips1;
 
 // Constructor
 ManagementTrips::ManagementTrips() : trips(nullptr), capacity(10), numTrips(0) {
@@ -13,6 +14,7 @@ ManagementTrips::~ManagementTrips() {
 
 // Copy constructor
 ManagementTrips::ManagementTrips(const ManagementTrips& other) : capacity(other.capacity), numTrips(other.numTrips) {
+    numTrips1 = numTrips;
     trips = new Trip[capacity];
     for (int i = 0; i < numTrips; ++i) {
         trips[i] = other.trips[i];
@@ -63,15 +65,31 @@ ManagementTrips& ManagementTrips::operator-=(const Trip& trip) {
 }
 
 // Print trips
-std::ostream& operator<<(std::ostream& os, const ManagementTrips& mt) {
-    if (mt.numTrips == 0) {
-        os << "The trip list is empty." << std::endl;
+void ManagementTrips::PrintTrips() const {
+    if (numTrips == 0) {
+        std::cout << "The trip list is empty." << std::endl;
     } else {
-        for (int i = 0; i < mt.numTrips; ++i) {
-            os << "Trip " << i + 1 << ":" << std::endl;
-            mt.trips[i].print();
-            os << std::endl;
+        for (int i = 0; i < numTrips; ++i) {
+            std::cout << "Trip " << i + 1 << ":" << std::endl;
+            trips[i].print(); // Assuming Trip has a print method
+            std::cout << std::endl;
         }
     }
-    return os;
 }
+
+void ManagementTrips::deleteTrip(int index) {
+    // Check if index is valid
+    if (index < 0 || index >= trips.size()) {
+        std::cerr << "Invalid index." << std::endl;
+        return;
+    }
+
+    // Remove the trip at the specified index
+    trips.erase(trips.begin() + index);
+
+    std::cout << "Trip at index " << index << " has been deleted." << std::endl;
+}
+int ManagementTrips::getTripNum() {
+    return this->numTrips;
+}
+

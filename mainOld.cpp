@@ -1,11 +1,13 @@
 static int TripNum = 0;
-using namespace std;
 
+#include <limits>
 #include "Trip.h"
+#include "Date.h"
 #include "ManagementTrips.h"
+
 using namespace std;
 
-void deleteTrips(ManagmentTrips *mts);
+void deleteTrips(ManagementTrips *mts);
 
 void AddTrip(ManagementTrips *mts);
 
@@ -13,7 +15,7 @@ int main() {
     ManagementTrips mts;
     int option;
     do {
-        cout << "Please Select an option: \n1.Print Trips\n2.Delete Trips\n3.Add Trip\\n4.Exit" << endl;
+        cout << "Please Select an option: \n1.Print Trips\n2.Delete Trips\n3.Add Trip\n4.Exit" << endl;
         cin >> option;
         switch (option) {
             case 1:
@@ -23,7 +25,7 @@ int main() {
                 deleteTrips(&mts);
                 break;
             case 3:
-                AddTrip(mts.GetTrips(), mts.GetSize());
+                AddTrip(&mts);
                 break;
             case 4:
                 cout << "Bye Bye!" << endl;
@@ -32,15 +34,29 @@ int main() {
                 cout << "Invalid option" << endl;
                 break;
         }
-    }
-
+    }while (option!= 4);
     return 0;
+
 }//main
 
 
-void deleteTrips(ManagmentTrips *mts) {
+void deleteTrips(ManagementTrips *mts) {
+    if (!mts) {
+        std::cerr << "ManagementTrips pointer is null." << std::endl;
+        return;
+    }
 
+    // Assuming ManagementTrips class has a method to get the total number of trips
+    int totalTrips = mts->getTripNum();
+
+    for (int i = 0; i < totalTrips; ++i) {
+        // Assuming ManagementTrips class has a method to delete a trip by index or ID
+        mts->deleteTrip(i);
+    }
+
+    std::cout << "All trips have been deleted." << std::endl;
 }
+
 
 void AddTrip(ManagementTrips *mts) {
     if (!mts) {

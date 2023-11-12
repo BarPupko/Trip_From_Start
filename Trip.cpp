@@ -6,6 +6,8 @@
 int Trip::nextTripNum = 1;
 
 // Constructor with parameters
+//Trip::Trip(const char* desc, int day, int month, int year): tripDesc(desc), tripDate(day, month, year) {
+//}
 Trip::Trip(const char *desc, int day, int month, int year) : date(day, month, year), TripNum(nextTripNum) {
     TripDesk = new char[strlen(desc) + 1];
     strcpy(TripDesk, desc);
@@ -67,7 +69,6 @@ void Trip::setTripDesk(const char *desk) {
 
 // Print function
 void Trip::print() const {
-    std::cout << "Trip Number: " << TripNum << std::endl;
     std::cout << "Trip Description: " << (TripDesk ? TripDesk : "No Description") << std::endl;
     std::cout << "Date: ";
     date.print();

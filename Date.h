@@ -8,7 +8,7 @@ private:
     int year;
 
 public:
-    Date(int day = 1, int month = 1, int year = 2000); // Constructor with default values
+    Date(int day,int month,int year); // Constructor with default values
     int getDay() const;
     int getMonth() const;
     int getYear() const;
@@ -21,6 +21,7 @@ public:
     bool isGreaterThan(const Date& other) const;
     bool isEqualTo(const Date& other) const;
     void print() const; // Function to print the date
+    Date();
 };
 
 #endif // DATE_H

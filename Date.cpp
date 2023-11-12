@@ -4,14 +4,20 @@ using namespace std;
 #include <iostream>
 
 Date::Date(int day, int month, int year) : day(day), month(month), year(year) {
-    this->day = day;
     this->month = month;
+
+    this->day = day;
+
     this->year = year;
 
+
 }
-bool Date::operator==(const Date& other) const {
+
+bool Date::operator==(const Date &other) const {
+
     return day == other.day && month == other.month && year == other.year;
 }
+
 int Date::getDay() const {
     return day;
 }
@@ -23,6 +29,7 @@ int Date::getMonth() const {
 int Date::getYear() const {
     return year;
 }
+
 
 void Date::setDay(int newDay) {
     if (newDay >= 1 && newDay <= 30) {
@@ -84,5 +91,9 @@ bool Date::isEqualTo(const Date &other) const {
 }
 
 void Date::print() const {
-    cout << day << "/" << month << "/" << year << endl;
+    cout << getDay() << "/" << getMonth() << "/" << getYear() << endl;
+}
+
+Date::Date() {
+
 }
