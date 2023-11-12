@@ -88,29 +88,26 @@ void EditTrip(Trip *arr, int size) {
 Trip *AddTrip(Trip *arr, int &size) {
     std::cout << "Enter details for the new trip:" << std::endl;
 
-    int tripNum;
-    char tripDesk[256]; // assuming a sensible max length for description
+//    int tripNum;
+    char tripDesc[256]; // assuming a sensible max length for description
     int day, month, year;
-
-
+//    std::cout << "Enter trip number: ";
+//    std::cin >> tripNum;
     std::cin.ignore(); // to consume any leftover newline
     std::cout << "Enter trip description: ";
-//    std::cin >> tripDesk;
-    std::string description;
-    std::cin >> description;
-    std::getline(std::cin, description);
-//    std::cin.getline(tripDesk, sizeof(tripDesk));
-    std::cout << "Enter day, month, and year for the trip: ";
+    std::cin.getline(tripDesc, sizeof(tripDesc));
+    std::cout << "Enter day, month, and year for the trip: " << endl;
     std::cin >> day >> month >> year;
 
     Trip *newArr = new Trip[size + 1];
     for (int i = 0; i < size; ++i) {
-        newArr[i] = arr[i];  // Make sure you have a proper copy constructor to handle the deep copy.
+        newArr[i] = arr[i];
     }
-    newArr[size] = Trip(tripDesk, day, month, year);
+    newArr[size] = Trip(tripDesc, day, month, year);
+    ++TripNum;
     size++;
-    delete[] arr;
 
+    delete[] arr;
     std::cout << "New trip added successfully." << std::endl;
     return newArr;
 }

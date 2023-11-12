@@ -14,7 +14,9 @@ private:
 public:
     Trip(const char *desc, int day, int month, int year);
     Trip();
-    Trip(const Trip& other);
+    Trip(const Trip& other); // Copy constructor
+    Trip& operator=(const Trip& other); // Copy assignment operator
+
     ~Trip();
 
     int getTripNum() const;

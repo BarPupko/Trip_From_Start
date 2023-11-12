@@ -15,17 +15,22 @@ Trip::Trip(const char *desc, int day, int month, int year) : date(day, month, ye
 // Default constructor
 Trip::Trip() : TripNum(nextTripNum), TripDesk(nullptr), date(Date()) {}
 
-// Copy constructor
-Trip::Trip(const Trip &other) : TripNum(other.TripNum), date(other.date) {
-    if (other.TripDesk) {
-        TripDesk = new char[strlen(other.TripDesk) + 1];
-        strcpy(TripDesk, other.TripDesk);
-    } else {
-        TripDesk = nullptr;
-    }
+Trip::Trip(const Trip& other) {
+    TripDesk = new char[strlen(other.TripDesk) + 1];
+    strcpy(TripDesk, other.TripDesk);
+    // Copy other members...
 }
 
-// Destructor
+Trip& Trip::operator=(const Trip& other) {
+    if (this != &other) {
+        delete[] TripDesk;
+        TripDesk = new char[strlen(other.TripDesk) + 1];
+        strcpy(TripDesk, other.TripDesk);
+        // Copy other members...
+    }
+    return *this;
+}
+
 Trip::~Trip() {
     delete[] TripDesk;
 }
