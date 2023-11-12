@@ -9,7 +9,9 @@ Date::Date(int day, int month, int year) : day(day), month(month), year(year) {
     this->year = year;
 
 }
-
+bool Date::operator==(const Date& other) const {
+    return day == other.day && month == other.month && year == other.year;
+}
 int Date::getDay() const {
     return day;
 }
@@ -41,9 +43,44 @@ void Date::setMonth(int newMonth) {
 void Date::setYear(int newYear) {
     if (newYear >= 1900 && newYear <= 2020) {
         this->year = newYear;
-    }else{
+    } else {
         newYear = 0;
     }
+}
+
+bool Date::isLessThan(const Date &other) const {
+    // First, compare the years.
+    if (year < other.year) {
+        return true;
+    } else if (year > other.year) {
+        return false;
+    }
+    // If years are the same, then compare the months.
+    if (month < other.month) {
+        return true;
+    } else if (month > other.month) {
+        return false;
+    }
+    // If months are also the same, finally compare the days.
+    if (day < other.day) {
+        return true;
+    }
+    // If none of the above returned, then the days are either greater or equal,
+    // so we return false here to say this date is NOT less than the other.
+    return false;
+}
+
+// Let's compare to see if this date is greater than another date.
+bool Date::isGreaterThan(const Date &other) const {
+    // We can use the function we just made to help us here.
+    // If the other date is NOT less than this one, then this one is greater.
+    return !isLessThan(other) && !isEqualTo(other);
+}
+
+// Let's see if this date is equal to another date.
+bool Date::isEqualTo(const Date &other) const {
+    // Check if the year, month, and day are all the same.
+    return year == other.year && month == other.month && day == other.day;
 }
 
 void Date::print() const {
