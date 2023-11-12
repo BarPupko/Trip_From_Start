@@ -5,12 +5,9 @@
 int Trip::nextTripNum = 1;
 
 // Constructor with parameters
-Trip::Trip(const char *desc, int day, int month, int year)
-        : date(day, month, year), TripNum(nextTripNum) {
-    TripDesk = desc ? new char[strlen(desc) + 1] : nullptr;
-    if (desc) {
-        strcpy(TripDesk, desc);
-    }
+Trip::Trip(const char *desc, int day, int month, int year) : date(day, month, year), TripNum(nextTripNum) {
+    TripDesk = new char[strlen(desc) + 1];
+    strcpy(TripDesk, desc);
     nextTripNum++;
 }
 
@@ -19,10 +16,13 @@ Trip::Trip(const char *desc, int day, int month, int year)
 Trip::Trip() : TripNum(nextTripNum), TripDesk(nullptr), date(Date()) {}
 
 // Copy constructor
-Trip::Trip(const Trip& other)
-        : TripNum(other.TripNum), date(other.date) {
-    TripDesk = new char[strlen(other.TripDesk) + 1];
-    strcpy(TripDesk, other.TripDesk);
+Trip::Trip(const Trip &other) : TripNum(other.TripNum), date(other.date) {
+    if (other.TripDesk) {
+        TripDesk = new char[strlen(other.TripDesk) + 1];
+        strcpy(TripDesk, other.TripDesk);
+    } else {
+        TripDesk = nullptr;
+    }
 }
 
 // Destructor
@@ -35,7 +35,7 @@ int Trip::getTripNum() const {
     return TripNum;
 }
 
-const char* Trip::getTripDesk() const {
+const char *Trip::getTripDesk() const {
     return TripDesk;
 }
 
@@ -48,12 +48,16 @@ void Trip::setTripNum(int num) {
     TripNum = num;
 }
 
-void Trip::setTripDesk(const char* desk) {
-    delete[] TripDesk;
-    TripDesk = new char[strlen(desk) + 1];
-    strcpy(TripDesk, desk);
-}
 
+void Trip::setTripDesk(const char *desk) {
+    delete[] TripDesk;
+    if (desk) {
+        TripDesk = new char[strlen(desk) + 1];
+        strcpy(TripDesk, desk);
+    } else {
+        TripDesk = nullptr;
+    }
+}
 
 // Print function
 void Trip::print() const {
